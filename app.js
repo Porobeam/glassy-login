@@ -6,10 +6,13 @@ const myConnection = require('express-myconnection');
 
 const app = express();
 
+// importing routes
+const indexRoutes = require('./src/routes/index');
+
 // settings
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src', 'views')); // Asegúrate de que la ruta es correcta
+app.set('views', path.join(__dirname, 'src', 'views'));
 
 // middlewares
 app.use(morgan('dev'));
@@ -22,6 +25,9 @@ app.use(myConnection(mysql, {
 }, 'single'));
 
 app.use(express.urlencoded({ extended: false }));
+
+//routes
+app.use('/', indexRoutes);
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
