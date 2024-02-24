@@ -5,6 +5,10 @@ controller.showLogin = (req, res) => {
     res.render('login.ejs')
 };
 
+controller.showRegister = (req, res) => {
+    res.render('register.ejs')
+};
+
 // controller.register = (req, res) => {
 //     const { username, email, password } = req.body;
     
