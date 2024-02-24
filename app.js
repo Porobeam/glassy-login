@@ -3,11 +3,15 @@ const morgan = require('morgan');
 const path = require('path');
 const mysql = require('mysql');
 const myConnection = require('express-myconnection');
+const bcrypt = require('bcryptjs');
 
 const app = express();
 
 // importing routes
 const indexRoutes = require('./src/routes/index');
+
+// importing models
+const userModel = require('./src/models/userModel');
 
 // settings
 app.set('port', process.env.PORT || 3000);

@@ -1,62 +1,42 @@
 const controller = {};
+const UserModel = require('../models/userModel');
 
-controller.register = (req, res) => {
-    res.render('register.ejs')
+controller.showLogin = (req, res) => {
+    res.render('login.ejs')
 };
-//
-// controller.list = (req, res) => {
+
+// controller.register = (req, res) => {
+//     const { username, email, password } = req.body;
+    
 //     req.getConnection((err, connection) => {
-//         connection.query('SELECT * FROM customer', (err, customer) => {
-//             if(err) {
-//                 res.json(err);
+//         if (err) throw err;
+
+//         // Primero, verifica si el email ya está registrado
+//         UserModel.findByEmail(connection, email, (err, user) => {
+//             if (err) {
+//                 // Manejar error
+//                 return res.status(500).send('Server error');
 //             }
-//             else{
-//                 res.render('customer', {
-//                     data: customer
-//                 });
+//             if (user) {
+//                 // Usuario ya existe con ese email
+//                 return res.status(400).send('Email already in use');
 //             }
+
+//             // Si no hay usuario con ese email, continua con el registro
+//             // Hashea la contraseña antes de guardarla
+//             const salt = bcrypt.genSaltSync(10);
+//             const password_hash = bcrypt.hashSync(password, salt);
+
+//             // Crea el nuevo usuario
+//             UserModel.create(connection, { username, email, password_hash }, (err, userId) => {
+//                 if (err) {
+//                     // Manejar error
+//                     return res.status(500).send('Server error');
+//                 }
+//                 // Usuario registrado exitosamente, tal vez iniciar sesión o enviar a la página de login
+//                 res.status(201).send('User registered');
+//             });
 //         });
-//     });
-// };
-
-// controller.save = (req, res) => {
-//     const data = req.body;
-//     console.log(req.body)
-//     req.getConnection((err, connection) => {
-//         const query = connection.query('INSERT INTO customer set ?', data, (err, customer) => {
-//             res.redirect('/');
-//         })
-//     })
-// };
-
-// controller.edit = (req, res) => {
-//     const {id} = req.params;
-//     req.getConnection((err,connection) => {
-//         connection.query('SELECT * FROM customer WHERE id = ?', [id], (err, customer) => {
-//             res.render('customerEdit', {
-//                 data: customer[0]
-//             })
-//         })
-//     })
-// };
-
-// controller.delete = (req, res) => {
-//     const {id} = req.params;
-//     req.getConnection((err, connection) => {
-        
-//         connection.query('DELETE FROM customer WHERE id = ?', [id], (err, rows) => {
-//             res.redirect('/');
-//         })
-//     })
-// };
-
-// controller.update = (req, res) => {
-//     const {id} = req.params;
-//     const newCustomer = req.body;
-//     req.getConnection((err, connection) => {
-//         connection.query('UPDATE customer set ? WHERE id = ?', [newCustomer, id], (err, rows) => {
-//             res.redirect('/');
-//         })
 //     });
 // };
 
